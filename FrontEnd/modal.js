@@ -77,6 +77,10 @@ async function editerGallery(){
         });
 }
  
+//supprimer elements sur page d'acceuil et modale dynamiquement
+
+const projetAcceuil = document.querySelector('.projetAcceuil')
+
 async function supprimerProjet(id, iconPoubelle, figureElement) {
     try {
         const response = await fetch(`http://localhost:5678/api/works/${id}`, {
@@ -87,37 +91,18 @@ async function supprimerProjet(id, iconPoubelle, figureElement) {
             },
         });
         if (response.ok) {
-           const galleryElements = document.querySelector(".gallery");
-            //galleryElements.innerHTML="";
-            
-            figureElement.remove(); 
-            galleryElements.remove()
+           figureElement.remove();
 
-            if (projets != null){
-                console.log("projet n'est pas null")
-        
-        
-            for (const projet of projets) {
-        
-                const projetElements = document.createElement("figure");
-                const imageProjet = document.createElement("img");
-                imageProjet.src = projet.imageUrl;
-                const titreProjet = document.createElement("figcaption");
-                titreProjet.innerText = projet.title;
-        
-                // Rattachement des elements
-                projetElements.appendChild(imageProjet);
-                projetElements.appendChild(titreProjet);
-                const gallery = galleryElements.appendChild(projetElements)
-                galleryElements.innerHTML += gallery
-        
-            }
-        }
-        else{
-            console.log("pas de projets");
-        }
+            console.log(projetAcceuil)
+            // projetAcceuil.remove();
+ 
+            const projets = await getData()
+             ocument.querySelector(".gallery").innerHTML=""
+            genererProjets(projets)
+ 
+            console.log(projets)
 
-             console.log("suppression du projet reussie")
+            console.log("suppression du projet reussie")  
 
         } else {
              console.log("La suppression du projet a échoué.");
@@ -131,10 +116,118 @@ editerGallery();
  
 // Aller vers la deuxieme modale
 
-modalButton.addEventListener("click", ajouterPhotos)
+modalButton.addEventListener("click", modalAjouterPhotos)
 
-async function ajouterPhotos() {
-
+async function modalAjouterPhotos() {
+    document.querySelector('.modal').style.display='none';
+    document.querySelector('.modal2').style.display=null;
 }
 
- 
+// Retour vers la première modale
+
+const switchModal = document.querySelector('.switch-modal')
+switchModal.addEventListener("click", switchModal1)
+
+async function switchModal1(){
+    document.querySelector('.modal').style.display=null;
+    document.querySelector('.modal2').style.display='none';
+}
+
+// Visuel de la photo a ajouter qui s'affiche si critères okay
+
+const fileInput = document.getElementById('file-upload');
+const iconForm = document.querySelector('.fa-image');
+const boutonForm = document.getElementById('upload-button')
+const textForm = document.querySelector('.text-form')
+const imagePreview = document.getElementById('image');
+
+fileInput.addEventListener('change', (event) => {
+
+  let file = event.target.files[0];
+
+  //verification taille
+  const fileSize = file.size;
+  const maxFileSize = 4 * 1024 * 1024;
+  if (fileSize > maxFileSize) {
+    alert('Le fichier sélectionné est trop volumineux.');
+    fileInput.value = ''; // Efface le fichier sélectionné ???
+    imagePreview.src = '';
+  }
+
+  //verification format
+  const fileType = file.type;
+  const acceptedFormats = ['image/jpeg', 'image/png','image/jpg'];
+
+  if (!acceptedFormats.includes(fileType)) {
+    alert('Le format de fichier sélectionné n\'est pas pris en charge.');
+    fileInput.value = ''; 
+    imagePreview.src = '';
+  }
+
+  const reader = new FileReader();
+  reader.onload = (event) => {
+    imagePreview.src = event.target.result;
+    //masquer le reste
+    iconForm.style.display = 'none'
+    boutonForm.style.display = 'none'
+    textForm.style.display = 'none'
+    fileInput.style.display = 'none'
+  };
+
+  reader.readAsDataURL(file);
+});
+
+//Envoie API
+
+async function newWorks(){
+    const addWorks = document.getElementById('upload-form');
+    addWorks.addEventListener('submit', async(e) =>{
+        e.preventDefault();
+    
+        const title = document.getElementById('titre').value;
+        const category = document.getElementById('categorie').value;
+        const image = fileInput.files[0];
+
+        if (!title || !category){
+            alert('Veuillez remplir tout les champs');
+            return;
+        }
+
+        console.log(title)
+        console.log(category)
+
+        const reader = new FileReader();
+        reader.onload = async () => {
+
+            const formData = new FormData();
+        formData.append('image', image);
+        formData.append('title', title);
+        formData.append('category', category);
+
+        console.log(image)
+    
+            try{
+                const reponse = await fetch("http://localhost:5678/api/works", {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        'accept': 'application/json',
+                        "Authorization": "Bearer " + sessionStorage.getItem("token"),
+                   },
+                });
+                if (reponse.ok){
+                    alert("projet ajouté avec succès")
+                } else {
+                    alert("erreur lors de l'envoi du projet")
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        reader.readAsBinaryString(image);
+    }); 
+}
+
+newWorks();
+

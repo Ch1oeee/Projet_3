@@ -79,26 +79,36 @@
                 <button class="close-modal modal-trigger"> <i class="fa-solid fa-xmark"></i></button>
             </div>
 
-            <h2>Ajout photo</h2>
+			<h2 class="modal2-title">Ajout photo</h2>
 
-            <div class="bloc-add-pictures">
-				<i class="fa-regular fa-image"></i>
-                <input id="inputFile" type="file" accept=".jpg, .jpeg, .png" hidden>
-                <label for="inputFile">+ Ajouter photo</label>
-                <p>jpg, png : 4mo max</p>
-            </div>
+			<form id="upload-form" action="" method="POST" enctype="multipart/form-data">
+				<div class="bloc-add-pictures">
+					<div id="image-preview">
+						<img src="#" alt="" id="image" >
+					</div>
+					<i class="fa-regular fa-image"></i>
+					<input id="file-upload" type="file" accept=".jpg, .jpeg, .png" size="4000000" required>
+					<button type="submit" id="upload-button">+ Ajouter photo</button>
+						<p class="text-form">jpg, png : 4mo max</p>
+				</div>
 
-			<div class="add-pictures-details">
-				<label for="titre">Titre</label>
-				<input type="text" name="titre" id="titre">
+				<div class="add-pictures-details">
+					<label id="title" for="titre">Titre</label>
+					<input type="text" name="titre" id="titre">
 
-				<label for="categorie">Catégorie</label>
-				<input type="text" name="categorie" id="categorie">
+					<label for="categorie">Catégorie</label>
+						<select class="selectionCategorie" id="categorie" >
+							<option value=""></option>
+							<option value="1">Objets</option>
+							<option value="2">Appartements</option>
+							<option value="3">Hôtels & restaurants</option>
+						</select>
 
-				<div class="border-top"></div>
+					<div class="border-top"></div>
 
-				<input type="submit" value="Valider">
-			</div>
+					<input class="validatePictures" type="submit" value="Valider">
+				</div>
+			</form>
         </div>
 	</div>
 

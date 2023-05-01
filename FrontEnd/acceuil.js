@@ -18,7 +18,9 @@ export function genererProjets(projets) {
 
     for (const projet of projets) {
 
+        const galleryElements = document.querySelector(".gallery");
         const projetElements = document.createElement("figure");
+        projetElements.className='projetAcceuil';
         const imageProjet = document.createElement("img");
         imageProjet.src = projet.imageUrl;
         const titreProjet = document.createElement("figcaption");
