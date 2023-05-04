@@ -141,6 +141,9 @@ const boutonForm = document.getElementById('upload-button')
 const textForm = document.querySelector('.text-form')
 const imagePreview = document.getElementById('image');
 
+// custom alertes 
+const photoAlert = document.getElementById('alert');
+
 fileInput.addEventListener('change', (event) => {
 
   let file = event.target.files[0];
@@ -149,22 +152,16 @@ fileInput.addEventListener('change', (event) => {
   const fileSize = file.size;
   const maxFileSize = 4 * 1024 * 1024;
   if (fileSize > maxFileSize) {
-    alert('Le fichier sélectionné est trop volumineux.');
-    fileInput.value = ''; // Efface le fichier sélectionné ???
-    imagePreview.src = '';
-  }
 
-  //verification format
-  const fileType = file.type;
-  const acceptedFormats = ['image/jpeg', 'image/png','image/jpg'];
+    photoAlert.innerHTML = 'Le fichier sélectionné est trop volumineux.';
+    photoAlert.style.display = 'block';
 
-  if (!acceptedFormats.includes(fileType)) {
-    alert('Le format de fichier sélectionné n\'est pas pris en charge.');
-    fileInput.value = ''; 
+    fileInput.value = ''; // Efface le fichier sélectionné 
     imagePreview.src = '';
 
   }else{
 
+    photoAlert.style.display = 'none';
   const reader = new FileReader();
   reader.onload = (event) => {
     imagePreview.src = event.target.result;
@@ -181,6 +178,10 @@ fileInput.addEventListener('change', (event) => {
 
 //Envoie API
 
+const champsRequired = document.querySelector('.alert-2');
+const successfullyAdded = document.querySelector('.alert-3')
+const notAdded = document.querySelector('.alert-4')
+
 async function newWorks(){
     const addWorks = document.getElementById('upload-form');
     addWorks.addEventListener('submit', async(e) =>{
@@ -191,13 +192,15 @@ async function newWorks(){
         const image = fileInput.files[0];
 
         if (!title || !category){
-            alert('Veuillez remplir tout les champs');
+            champsRequired.innerHTML = 'Veuillez remplir tout les champs.';
+            champsRequired.style.display = 'block';
             return;
         }
 
         console.log(title)
         console.log(category)
 
+        champsRequired.style.display = 'none';
         const reader = new FileReader();
         reader.onload = async () => {
 
@@ -218,9 +221,15 @@ async function newWorks(){
                    },
                 });
                 if (reponse.ok){
-                    alert("projet ajouté avec succès")
+                    successfullyAdded.innerHTML = 'Projet ajouté avec succès.';
+                    successfullyAdded.style.display = 'block';
+
+                    const projets = await getData()
+                    document.querySelector(".gallery").innerHTML=""
+                    genererProjets(projets)
                 } else {
-                    alert("erreur lors de l'envoi du projet")
+                    notAdded.innerHTML = 'Erreur lors de l\'envoi du projet.';
+                    notAdded.style.display = 'block';
                 }
             } catch (error) {
                 console.error(error);

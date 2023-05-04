@@ -606,6 +606,41 @@ header a:hover{
   	align-items: center;
 }
 
+/* Alerte */
+
+.alert {
+	display: none;
+
+	background-color: #fff3cd;
+	color: #856404;
+	padding: 15px;
+	border: 1px solid transparent;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+
+.alert-3{
+	display: none;
+
+	background-color: green;
+	color: white;
+	padding: 15px;
+	border: 1px solid transparent;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+
+.alert-4{
+	display: none;
+
+	background-color: #ff9999;
+	color: white;
+	padding: 15px;
+	border: 1px solid transparent;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+
 
 
 
