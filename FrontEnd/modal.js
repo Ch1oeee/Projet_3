@@ -162,7 +162,8 @@ fileInput.addEventListener('change', (event) => {
     alert('Le format de fichier sélectionné n\'est pas pris en charge.');
     fileInput.value = ''; 
     imagePreview.src = '';
-  }
+
+  }else{
 
   const reader = new FileReader();
   reader.onload = (event) => {
@@ -175,6 +176,7 @@ fileInput.addEventListener('change', (event) => {
   };
 
   reader.readAsDataURL(file);
+    }
 });
 
 //Envoie API
