@@ -553,6 +553,10 @@ header a:hover{
     
 }
 
+.bloc-add-pictures input{
+	display: none;
+}
+
 .add-pictures-details {
 	display: flex;
 	flex-direction: column;

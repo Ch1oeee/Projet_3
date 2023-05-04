@@ -184,18 +184,37 @@ const notAdded = document.querySelector('.alert-4')
 
 async function newWorks(){
     const addWorks = document.getElementById('upload-form');
+    const titleInput = document.getElementById('titre');
+    const categoryInput = document.getElementById('categorie');
+    const fileInput = document.getElementById('file-upload');
+    const submitButton = document.querySelector('.validatePictures');
+
+    function updateSubmitButton() {
+        if (titleInput.value !== '' && categoryInput.value !== '' && fileInput.files.length > 0) {
+          submitButton.classList.remove('disabled');
+          submitButton.style.backgroundColor = '#1D6154';
+        } else {
+          submitButton.classList.add('disabled');
+          submitButton.style.backgroundColor = '#cbc9c977';
+        }
+    }
+
+    titleInput.addEventListener('input', updateSubmitButton);
+    categoryInput.addEventListener('change', updateSubmitButton);
+    fileInput.addEventListener('change', updateSubmitButton);
+
     addWorks.addEventListener('submit', async(e) =>{
         e.preventDefault();
-    
-        const title = document.getElementById('titre').value;
-        const category = document.getElementById('categorie').value;
-        const image = fileInput.files[0];
 
-        if (!title || !category){
+        if (submitButton.classList.contains('disabled')) {
             champsRequired.innerHTML = 'Veuillez remplir tout les champs.';
             champsRequired.style.display = 'block';
             return;
         }
+    
+        const title = document.getElementById('titre').value;
+        const category = document.getElementById('categorie').value;
+        const image = fileInput.files[0];
 
         console.log(title)
         console.log(category)
@@ -242,3 +261,11 @@ async function newWorks(){
 
 newWorks();
 
+// changer boutton du formulaire pour ajouter des photos
+
+const addPhotoButton = document.getElementById('upload-button');
+const fileUploadInput = document.getElementById('file-upload');
+
+addPhotoButton.addEventListener('click', () => {
+  fileUploadInput.click();
+});
