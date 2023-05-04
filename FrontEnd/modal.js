@@ -10,6 +10,8 @@ modalTriggers.forEach(trigger =>trigger.addEventListener('click', toggleModal))
 
 function toggleModal(){
     modalContainer.classList.toggle("active")
+    document.querySelector('.modal').style.display=null;
+    document.querySelector('.modal2').style.display='none';
 }
 
 
@@ -53,27 +55,31 @@ async function editerGallery(){
     const json = await reponse.json()
         json.forEach(element => {
  
-             const galleryEdit = document.querySelector(".gallery-edit");
-             const figureElement = document.createElement("figure");
-             const imageElement = document.createElement("img");
-             imageElement.src = element.imageUrl;
-             imageElement.alt = element.title;
-             const editerTitre = document.createElement("figcaption");
-             editerTitre.innerHTML="éditer";
+            const galleryEdit = document.querySelector(".gallery-edit");
+            const figureElement = document.createElement("figure");
+            const imageElement = document.createElement("img");
+            imageElement.src = element.imageUrl;
+            imageElement.alt = element.title;
+            const editerTitre = document.createElement("figcaption");
+            editerTitre.innerHTML="éditer";
+            const iconMove = document.createElement("button");
+            iconMove.className="fa-solid fa-arrows-up-down-left-right";
  
-             const iconPoubelle = document.createElement("button");
-             iconPoubelle.className="fa-regular fa-trash-can";
+ 
+            const iconPoubelle = document.createElement("button");
+            iconPoubelle.className="fa-regular fa-trash-can";
             iconPoubelle.addEventListener("click", function() {
                 const confirmDelete = confirm("Êtes-vous sûr de vouloir supprimer ce projet ?"); // Ajout du message de confirmation
                 if (confirmDelete) {
                     supprimerProjet(element.id, iconPoubelle, figureElement);
                 }
-           });
+            });
  
-             galleryEdit.appendChild(figureElement);
-             figureElement.appendChild(imageElement);
-             figureElement.appendChild(editerTitre);
-             figureElement.appendChild(iconPoubelle);
+            galleryEdit.appendChild(figureElement);
+            figureElement.appendChild(imageElement);
+            figureElement.appendChild(editerTitre);
+            figureElement.appendChild(iconPoubelle);
+            figureElement.appendChild(iconMove);
         });
 }
  

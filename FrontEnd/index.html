@@ -88,7 +88,7 @@
 					</div>
 					<i class="fa-regular fa-image"></i>
 					<input id="file-upload" type="file" accept=".jpg, .jpeg, .png" size="4000000" required>
-					<button type="submit" id="upload-button">+ Ajouter photo</button>
+					<button type="button" id="upload-button">+ Ajouter photo</button>
 						<p class="text-form">jpg, png : 4mo max</p>
 				</div>
 
@@ -99,7 +99,7 @@
 
 				<div class="add-pictures-details">
 					<label id="title" for="titre">Titre</label>
-					<input type="text" name="titre" id="titre">
+					<input type="text" name="titre" id="titre" pattern="[a-zA-Z\s]+" >
 
 					<label for="categorie">Catégorie</label>
 						<select class="selectionCategorie" id="categorie" >

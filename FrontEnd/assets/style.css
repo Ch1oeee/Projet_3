@@ -454,6 +454,24 @@ header a:hover{
 	cursor: pointer;
 }
 
+.fa-arrows-up-down-left-right {
+	display: none;
+	position: absolute;
+	top: 5px;
+	right: 35px;
+	background-color: #000;
+	color: #fff;
+	padding: 5px;
+	font-size: 10px;
+	border: none;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+.gallery-edit figure:hover .fa-arrows-up-down-left-right{
+	display: block;
+}
+
 .border-top{
 	border-top: #b3b3b3 solid 1px;
 	width: 420px;
@@ -533,7 +551,7 @@ header a:hover{
     border-radius: 30px;
     color: #285f7a;
     background-color: #cbc9c977;
-    margin: auto;
+	margin: 10px auto;
 	margin-bottom: 10px;
     padding: 10px 30px 10px 30px;
     cursor: pointer;
