@@ -1,3 +1,5 @@
+const loginRefused = document.querySelector('.alert-4')
+
 const logUser= async() => {
  
     const formLogin = document.getElementById("formLogin")
@@ -28,7 +30,8 @@ const logUser= async() => {
             window.location.href='index.html'
 
         } else {
-            alert('email ou mot de passe invalide');
+            loginRefused.innerHTML = 'Email ou mot de passe invalide.';
+            loginRefused.style.display = 'block';
         }
     })
 }
