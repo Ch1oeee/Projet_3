@@ -252,6 +252,24 @@ async function newWorks(){
                     const projets = await getData()
                     document.querySelector(".gallery").innerHTML=""
                     genererProjets(projets)
+                    editerGallery();
+                
+                    titleInput.value = '';
+                    categoryInput.value = '';
+                    fileInput.value = '';
+                    imagePreview.src = '';
+
+                    // Réafficher le formulaire photo
+                    iconForm.style.display = null
+                    boutonForm.style.display = null
+                    textForm.style.display = null
+                    fileInput.style.display = null
+
+                     // Masquer le message de succès après 2 secondes
+                    setTimeout(() => {
+                    successfullyAdded.style.display = 'none';
+                    }, 2000);
+
                 } else {
                     notAdded.innerHTML = 'Erreur lors de l\'envoi du projet.';
                     notAdded.style.display = 'block';
