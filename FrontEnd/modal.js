@@ -209,6 +209,24 @@ async function newWorks(){
     categoryInput.addEventListener('change', updateSubmitButton);
     fileInput.addEventListener('change', updateSubmitButton);
 
+    //Recuperer les catégories de manière dynamique et plus en html.
+    categoryInput.addEventListener('focus', async () => {
+        const categorySelect = document.getElementById("categorie");
+        const response = await fetch("http://localhost:5678/api/categories");
+        if (response.ok) {
+          const categories = await response.json();
+          categorySelect.innerHTML = ""; //Pour éviter les doublons
+          categories.forEach(category => {
+            const option = document.createElement("option");
+            option.value = category.id;
+            option.text = category.name;
+            categorySelect.appendChild(option);
+          });
+        } else {
+          console.log("Erreur lors de la récupération des catégories");
+        }
+    });
+
     addWorks.addEventListener('submit', async(e) =>{
         e.preventDefault();
 
