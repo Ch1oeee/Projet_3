@@ -53,9 +53,12 @@ logout.addEventListener("click", function(){
 async function editerGallery(){
     const reponse = await fetch("http://localhost:5678/api/works")
     const json = await reponse.json()
+
+    const galleryEdit = document.querySelector(".gallery-edit");
+    
         json.forEach(element => {
  
-            const galleryEdit = document.querySelector(".gallery-edit");
+            if (!galleryEdit.querySelector(`[data-id="${element.id}"]`)) {
             const figureElement = document.createElement("figure");
             const imageElement = document.createElement("img");
             imageElement.src = element.imageUrl;
@@ -74,13 +77,16 @@ async function editerGallery(){
                     supprimerProjet(element.id, iconPoubelle, figureElement);
                 }
             });
+
+            figureElement.dataset.id = element.id;
  
             galleryEdit.appendChild(figureElement);
             figureElement.appendChild(imageElement);
             figureElement.appendChild(editerTitre);
             figureElement.appendChild(iconPoubelle);
             figureElement.appendChild(iconMove);
-        });
+        }
+    });
 }
  
 //supprimer elements sur page d'acceuil et modale dynamiquement
