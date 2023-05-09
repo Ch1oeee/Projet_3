@@ -1,23 +1,16 @@
-// Récupération des projets depuis l'API
-export const reponseProjets = await fetch('http://localhost:5678/api/works/');
-export const projets = await reponseProjets.json();
-
-if(reponseProjets.ok){
-    console.log(projets);
-}else{
-    console.log("Erreur de recupération.");
+// Récupération des projets depuis l'API //
+async function getData(){
+    const reponseProjets = await fetch('http://localhost:5678/api/works/');
+    return reponseProjets.json();
 }
 
-// génération des projets
-const galleryElements = document.querySelector(".gallery");
+const projets = await getData()
 
-export function genererProjets(projets) {
-    if (projets != null){
-        console.log("projet n'est pas null")
+export{ getData, genererProjets };
 
-
+// Génération des projets //
+async function genererProjets(projets) {
     for (const projet of projets) {
-
         const galleryElements = document.querySelector(".gallery");
         const projetElements = document.createElement("figure");
         projetElements.className='projetAcceuil';
@@ -27,15 +20,10 @@ export function genererProjets(projets) {
         titreProjet.innerText = projet.title;
 
         // Rattachement des elements
-        projetElements.appendChild(imageProjet);
-        projetElements.appendChild(titreProjet);
         galleryElements.appendChild(projetElements)
-
+        projetElements.appendChild(imageProjet);
+        projetElements.appendChild(titreProjet);   
     }
-}
-else{
-    console.log("pas de projets");
-}
 }
 genererProjets(projets);
 
@@ -43,7 +31,7 @@ genererProjets(projets);
 const reponseCategories = await fetch('http://localhost:5678/api/categories/');
 const categories = await reponseCategories.json();
 
-// génération des boutons filtres categories
+// Génération des boutons filtres catégories
 const conteneurFiltre = document.querySelector(".conteneurBtnFiltre");
 
 const filtreTous = document.querySelector(".btnTous");

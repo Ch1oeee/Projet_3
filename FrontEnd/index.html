@@ -16,7 +16,7 @@
 </head>
 <body>
 
-	<!-- ESSAI BARRE MODALE EN HAUT -->
+	<!-- BARRE MODALE EN HAUT -->
 	<div class="barreModale admin" style="display: none;" > 
 			<button class="btnEditionBarre">
 				<i class="fa-regular fa-pen-to-square"></i>
@@ -56,12 +56,12 @@
 		</article>
 	</section>
 
-	<!-- modale conteneur 1 -->
+	<!-- modale conteneur -->
 
 	<div class="modal-container"> 
 		<div class="overlay modal-trigger"></div>
 
-		<div class="modal">
+		<div class="modal" id="modal">
 			<button class="close-modal modal-trigger"> <i class="fa-solid fa-xmark"></i></button>
 			<h2 class="title-modal">Galerie photo</h2>
 			<div class="gallery-edit">
@@ -75,45 +75,46 @@
 	
 		<div class="modal2" style="display: none">
             <div id="bloc-boutons">
-                <button><i class="fa-regular fa-arrow-left"></i></button>
+                <button class="switch-modal"><i class="fa-solid fa-arrow-left"></i></i></button>
                 <button class="close-modal modal-trigger"> <i class="fa-solid fa-xmark"></i></button>
             </div>
 
-			<h2 class="modal2-title">Ajout photo</h2>
+			<div class="modal2-content">
+				<h2 class="modal2-title">Ajout photo</h2>
 
-			<form id="upload-form" action="" method="POST" enctype="multipart/form-data">
-				<div class="bloc-add-pictures">
-					<div id="image-preview">
-						<img src="#" alt="" id="image" >
-					</div>
-					<i class="fa-regular fa-image"></i>
-					<input id="file-upload" type="file" accept=".jpg, .jpeg, .png" size="4000000" required>
-					<button type="button" id="upload-button">+ Ajouter photo</button>
+				<form id="upload-form" action="" method="POST" enctype="multipart/form-data">
+					<div class="bloc-add-pictures">
+						<div id="image-preview">
+							<img src="#" alt="" id="image" >
+						</div>
+						<i class="fa-regular fa-image"></i>
+						<input id="file-upload" type="file" accept=".jpg, .jpeg, .png" size="4000000" required>
+						<button type="button" id="upload-button">+ Ajouter photo</button>
 						<p class="text-form">jpg, png : 4mo max</p>
-				</div>
+					</div>
 
-				<div class="alert alert-1"></div>
-				<div class="alert alert-2"></div>
-				<div class="alert-3"></div>
-				<div class="alert-4"></div>
+					<div class="alert alert-1"></div>
+					<div class="alert alert-2"></div>
+					<div class="alert-3"></div>
+					<div class="alert-4"></div>
+			
+					<div class="add-pictures-details">
+						<label id="title" for="titre">Titre</label>
+						<input type="text" name="titre" id="titre" pattern="[a-zA-Z\s]+" >
 
-				<div class="add-pictures-details">
-					<label id="title" for="titre">Titre</label>
-					<input type="text" name="titre" id="titre" pattern="[a-zA-Z\s]+" >
-
-					<label for="categorie">Catégorie</label>
+						<label for="categorie">Catégorie</label>
 						<select class="selectionCategorie" id="categorie" >
-							<option value=""></option>
+							 <option value=""></option> 
 						</select>
 
-					<div class="border-top"></div>
+						<div class="border-top"></div>
 
-					<input class="validatePictures" type="submit" value="Valider">
-				</div>
-			</form>
+						<input class="validatePictures" type="submit" value="Valider">
+					</div>
+				</form>
+			</div>
         </div>
 	</div>
-
 
 	<section id="portfolio">
 		<div class="adminProjet">
@@ -138,6 +139,7 @@
 		</div>
 
 	</section>
+	
 	<section id="contact">
 		<h2>Contact</h2>
 		<p>Vous avez un projet ? Discutons-en !</p>

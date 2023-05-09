@@ -1,5 +1,6 @@
 const loginRefused = document.querySelector('.alert-4')
 
+// Connexion de l'utilisateur
 const logUser= async() => {
  
     const formLogin = document.getElementById("formLogin")
@@ -35,6 +36,5 @@ const logUser= async() => {
         }
     })
 }
-
 logUser()
 
