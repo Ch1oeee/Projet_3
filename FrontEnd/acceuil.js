@@ -37,7 +37,7 @@ const conteneurFiltre = document.querySelector(".conteneurBtnFiltre");
 const filtreTous = document.querySelector(".btnTous");
 filtreTous.addEventListener("click", function(){
     document.querySelector(".gallery").innerHTML = "";
-    genererProjets(projets);  ; 
+    genererProjets(projets);  
 });
 
 const filtreObjets = document.querySelector(".btnObjets");
@@ -46,7 +46,7 @@ filtreObjets.addEventListener("click", function(){
         return element.category.name === "Objets"
     });
     document.querySelector(".gallery").innerHTML = "";
-    genererProjets(filtre);;
+    genererProjets(filtre);
 });
 
 const filtreAppartements = document.querySelector(".btnAppartements");
@@ -55,7 +55,7 @@ filtreAppartements.addEventListener("click", function(){
         return element.category.name === "Appartements"
     });
     document.querySelector(".gallery").innerHTML = "";
-    genererProjets(filtre);;
+    genererProjets(filtre);
 });
 
 const filtreHotelsEtRestaurants = document.querySelector(".btnHotelsEtRestaurants");
@@ -64,7 +64,7 @@ filtreHotelsEtRestaurants.addEventListener("click", function(){
         return element.category.name === "Hotels & restaurants"
     });
     document.querySelector(".gallery").innerHTML = "";
-    genererProjets(filtre);;
+    genererProjets(filtre);
 });
 
 
